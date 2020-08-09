@@ -149,7 +149,7 @@ jQuery('document').ready(function ($) {
 					percentage: percent,
 					diameter: 70,
 					lineWidth: 10,
-					fontFamily: 'lato',
+					fontFamily: 'Open Sans',
 					fontSize: '20px',
 					speed: 30,
 					diameter: 50,

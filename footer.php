@@ -45,7 +45,7 @@ namespace WP_Rig\WP_Rig;
 <div class="popup-modal popup-modal-small shadow" data-popup-modal="package-form-popup">
 	<i class="fa fa-times popup-modal__close"></i>
 		<div class="pop-up-content">
-		<h2>Thank you for choosing My Business VA</h3>
+		<h2 style="max-width: 320px;">Thank you for choosing My Business VA</h3>
 		<?php echo do_shortcode( '[contact-form-7 id="704" title="Sign Up Form"]' ); ?>
 	</div>
 </div>

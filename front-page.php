@@ -24,13 +24,16 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 		?>
 		<section id="skills" class='ed-counterPro-section'>
 			<div class="counterPro-image">
-				<img src="<?php echo esc_url( '//mybusinessva.com/wp-content/uploads/2018/03/Executives-skills-lis.jpg' ); ?>"  />
+				<?php
+					$services_img = get_field( 'services_image' ) ? get_field( 'services_image' )['url'] : get_bloginfo( 'url ' ) . '/wp-content/uploads/2018/03/Executives-skills-lis.jpg';
+				?>
+				<img src="<?php echo esc_url( $services_img ); ?>"  />
 			</div>
 			<div class="ed-container">
 				<div class="counterPro-content">
 					<div class="counterPro-content-text">
 						<h2 class="counterPro-title section-title"><?php the_field( 'services_title' ); ?></h2>
-						<h4 class="counterPro-subtitle section-subtitle"><?php  the_field( 'services_subtitle' );?></h4>
+						<h4 class="counterPro-subtitle section-subtitle"><?php the_field( 'services_subtitle' ); ?></h4>
 						<div class="counterPro-desc section-desc"><?php the_field( 'services_content' ); ?></div>
 					</div>
 					<?php if ( have_rows( 'services' ) ) : ?>
@@ -69,14 +72,17 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 
 		<section id="aboutus" class='ed-skillPro-section'>
 			<figure class="skillPro-image">
-				<img src="<?php echo esc_url( '//mybusinessva.com/wp-content/uploads/2018/03/Our-Team-Work2.jpg' ); ?>"  />
+				<?php
+					$skills_img = get_field( 'skills_section_image' ) ? get_field( 'skills_section_image' )['url'] : get_bloginfo( 'url ' ) . '/wp-content/uploads/2018/03/Our-Team-Work2.jpg';
+				?>
+				<img src="<?php echo esc_url( $skills_img ); ?>"  />
 			</figure>
 			<div class="ed-container">
 				<div class="skillPro-content">
 					<div class="skillPro-content-text">
-						<h2 class="skillPro-title section-title">Our Team Work</h2>
+						<h2 class="skillPro-title section-title"><?php echo esc_attr( get_field( 'skills_section_title' ) ? get_field( 'skills_section_title' ) : 'Our Team Work' ) ?></h2>
 
-						<p class="skillPro-desc section-desc">In the early days of our businesses human resources were one of our biggest problems.  Finding good people without spending a fortune on both office space and wages was really prohibitive to our growth.  In the past we'd tried out various virtual assistants but with limited luck in terms of quality and knowledge we needed.  We soon realised there was a need for a source of high quality knowledgable virtual assistants who could hit the ground running. That's why we founded mybusinessva to incorporate a strict vetting and quality control program to save you the hours in training and interviewing as well as the savings in wages and office spaces. The compounded result is an incredible human resource at a fraction of the cost.</p>
+						<div class="skillPro-desc section-desc"><?php the_field( 'skills_section_content' ); ?></div>
 					</div>
 					<div class="skillPro-content-icon">
 						<div class="skillPro-bar-wrap skill-one">
@@ -99,7 +105,7 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 		<?php if ( have_rows( 'team_members' ) ) : ?>
 		<section id="ourteam" class="our-team">
 			<div class="ed-container">
-				<h2 class="our-team__title">Meet Our Team</h2>
+				<h2 class="our-team__title section-title">Meet Our Team</h2>
 				<div class="our-team__grid">
 					<?php while ( have_rows( 'team_members' ) ) :
 							the_row();
@@ -303,11 +309,13 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 										<div class="client-info clearfix">
 
 											<div class="client-avatar">
-												<?php $image = get_sub_field( 'image' );
-												$size = 'medium'; // (thumbnail, medium, large, full or custom size)
-												if( $image ) {
-													echo wp_get_attachment_image( $image['id'], $size );
-												}?>
+													<?php
+												$image = get_sub_field( 'image' );
+												$size  = 'medium';
+													if ( $image ) {
+														echo wp_get_attachment_image( $image['id'], $size );
+													}
+													?>
 											</div>
 											<div class="client-bio">
 												<h3 class="client-name"><?php the_sub_field( 'name' ); ?></h3>
@@ -349,8 +357,11 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 				<?php echo do_shortcode( '[contact-form-7 id="677" title="Contact form 1"]' ); ?>
 				</div>
 				<div class="right-column">
-				<?php if ( have_rows( 'contact_details' ) ) :
-					while ( have_rows( 'contact_details' ) ) : the_row(); ?>
+					<?php
+					if ( have_rows( 'contact_details' ) ) :
+						while ( have_rows( 'contact_details' ) ) :
+							the_row();
+							?>
 					<div class="contact-box">
 						<div class="contact-icon">
 							<i class="fa <?php the_sub_field( 'icon' ); ?>"></i>
@@ -360,7 +371,10 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 							<?php the_sub_field( 'details' ); ?>
 						</div>
 					</div>
-				<?php endwhile; endif; ?>
+							<?php
+					endwhile;
+				endif;
+					?>
 				</div>
 			</div>
 		</div>

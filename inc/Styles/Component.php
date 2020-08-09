@@ -345,11 +345,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		}
 
 		$google_fonts = [
-			'Alef'            => [ '700' ],
-			'Source Sans Pro' => [ '400' ],
-			'Roboto'          => [ '400', '500', '700' ],
-			'Lato'            => [ '300', '400', '600', '700' ],
-			'Poppins'         => [ '600', '700' ],
+			'Work Sans' => [ '500', '600', '700' ],
+			'Open Sans' => [ '400', '500', '600', '700' ],
 		];
 
 		/**
