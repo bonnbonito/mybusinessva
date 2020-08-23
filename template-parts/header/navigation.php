@@ -19,7 +19,7 @@ if ( ! wp_rig()->is_primary_nav_menu_active() ) {
 	<div class="ed-container">
 		<nav id="site-navigation" class="main-navigation nav__primary" role="navigation">
 			<div class="mobile-site-logo">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" ><img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/mobile-logo.png' ) ); ?>" alt="<?php bloginfo( 'name' ); ?>"></a>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" ><img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/mobile-logo.webp' ) ); ?>" alt="<?php bloginfo( 'name' ); ?>"></a>
 			</div>
 			<button id="menu-toggle" class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'wp-rig' ); ?></button>
 			<?php

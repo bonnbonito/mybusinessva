@@ -12,14 +12,3 @@
 	position: absolute;
 	display: none;
 }
-
-.slider .caption-wrapper {
-    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
-    bottom: 0;
-    color: #fff;
-    left: 0;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: 0;
-}

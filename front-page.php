@@ -18,16 +18,18 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 		<?php
 		while ( have_posts() ) {
 			the_post();
-
-			get_template_part( 'template-parts/content/entry', 'front' );
-		}
 		?>
+		<section id="welcome" class='ed-intro-section'>
+			<div class="ed-container">
+				<?php the_field( 'intro_section' ); ?>
+			</div>
+		</section>
 		<section id="skills" class='ed-counterPro-section'>
 			<div class="counterPro-image">
 				<?php
 					$services_img = get_field( 'services_image' ) ? get_field( 'services_image' )['url'] : get_bloginfo( 'url ' ) . '/wp-content/uploads/2018/03/Executives-skills-lis.jpg';
 				?>
-				<img src="<?php echo esc_url( $services_img ); ?>"  />
+				<img src="<?php echo esc_url( $services_img ); ?>"  loading="lazy"/>
 			</div>
 			<div class="ed-container">
 				<div class="counterPro-content">
@@ -46,7 +48,6 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 										<div class="js-toggle__left">
 											<?php if ( get_sub_field( 'icon' ) ) : ?>
 											<div style="margin-right: 10px;">
-												<i class="fa <?php the_sub_field( 'icon' ); ?>"></i>
 											</div>
 											<?php endif; ?>
 											<div>
@@ -54,7 +55,7 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 											</div>
 										</div>
 										<div class="arrow">
-											<i class="fa fa-caret-down"></i>
+											<span class="icon-caret-down"></span>
 										</div>
 									</div>
 									<?php if ( get_sub_field( 'content' ) ) : ?>
@@ -123,22 +124,25 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 							<div class="our-team__box__links">
 								<?php if ( get_sub_field( 'social_links' )['linkedin'] ) : ?>
 									<a href="<?php echo esc_url( get_sub_field( 'social_links' )['linkedin'] ); ?>" target="_blank" title="Visit <?php the_sub_field( 'name' ); ?> LinkedIn account">
-										<i class="fab fa-linkedin-in"></i>
+										<span class="icon-linkedin"></span>
 									</a>
 								<?php endif; ?>
 								<?php if ( get_sub_field( 'social_links' )['facebook'] ) : ?>
 									<a href="<?php echo esc_url( get_sub_field( 'social_links' )['facebook'] ); ?>" target="_blank" title="Visit <?php the_sub_field( 'name' ); ?> Facebook account">
-										<i class="fab fa-facebook-f"></i>
+										<span class="icon-facebook-f"></span>
 									</a>
 								<?php endif; ?>
 								<?php if ( get_sub_field( 'social_links' )['twitter'] ) : ?>
 									<a href="<?php echo esc_url( get_sub_field( 'social_links' )['twitter'] ); ?>" target="_blank" title="Visit <?php the_sub_field( 'name' ); ?> Twitter account">
-										<i class="fab fa-twitter"></i>
+										<span class="icon-twitter"></span>
 									</a>
 								<?php endif; ?>
 							</div>
 							<?php endif; ?>
 						</div>
+						<?php if ( get_sub_field( 'break_column' ) ) : ?>
+							<div class="break"></div>
+						<?php endif; ?>
 					<?php endwhile; ?>
 				</div>
 			</div>
@@ -162,7 +166,7 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 					</div>
 					<div class="pricing-top-content">
 						<div class="pricing-price">
-							<span class="pricing-symbol"><i class="fas fa-pound-sign"></i></span>
+							<span class="pricing-symbol">&pound;</span>
 							<span class="pricing-sum"><?php echo $featured_table['price']; ?></span>
 							<?php if ( $featured_table['per'] ) : ?>
 							<span class="pricing-per">/<?php echo $featured_table['per']; ?></span>
@@ -190,7 +194,7 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 					</div>
 					<div class="pricing-top-content">
 						<div class="pricing-price">
-							<span class="pricing-symbol"><i class="fas fa-pound-sign"></i></span>
+							<span class="pricing-symbol">&pound;</span>
 							<span class="pricing-sum"><?php echo $pricing_table['price']; ?></span>
 							<?php if ( $pricing_table['per'] ) : ?>
 							<span class="pricing-per">/<?php echo $pricing_table['per']; ?></span>
@@ -218,7 +222,7 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 					</div>
 					<div class="pricing-top-content">
 						<div class="pricing-price">
-							<span class="pricing-symbol"><i class="fas fa-pound-sign"></i></span>
+							<span class="pricing-symbol">&pound;</span>
 							<span class="pricing-sum"><?php echo $pricing_table2['price']; ?></span>
 							<?php if ( $pricing_table2['per'] ) : ?>
 							<span class="pricing-per">/<?php echo $pricing_table2['per']; ?></span>
@@ -273,7 +277,7 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 										<?php the_sub_field( 'question' ); ?>
 									</div>
 									<div class="arrow">
-										<i class="fa fa-angle-down"></i>
+										<span class="icon-chevron-down"></span>
 									</div>
 								</div>
 								<?php if ( get_sub_field( 'answer' ) ) : ?>
@@ -364,7 +368,7 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 							?>
 					<div class="contact-box">
 						<div class="contact-icon">
-							<i class="fa <?php the_sub_field( 'icon' ); ?>"></i>
+							<span class="icon-<?php the_sub_field( 'icon' ); ?>"></span>
 						</div>
 						<div class="contact-details">
 							<h3><?php the_sub_field( 'title' ); ?></h3>
@@ -379,6 +383,9 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 			</div>
 		</div>
 	</section>
+			<?php
+		}
+		?>
 
 	</main><!-- #primary -->
 <?php

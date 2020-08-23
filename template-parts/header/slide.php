@@ -7,9 +7,8 @@
 
 namespace WP_Rig\WP_Rig;
 
-use WP_Query;
-
-?>
+if ( have_rows( 'front_slider' ) ) :
+	?>
 <script type="text/javascript">
 	jQuery(function($){
 		$('#ed-slider').owlCarousel({
@@ -20,49 +19,72 @@ use WP_Query;
 			animateOut: 'fadeOut',
 			singleItem:true,
 			autoPlay: 9000000,
+			autoHeight:true,
 			loop: true,
 			items: 1,
 			navText: ['prev', 'next'],
 			paginationNumbers: true,
 			afterAction: function(el){
 			//remove class active
-				this .$owlItems .removeClass('active')
+				this.$owlItems.removeClass('active')
 				//add class active
-				this .$owlItems //owl internal $ object containing items
-				.eq(this.currentItem) .addClass('active')
+				this.$owlItems //owl internal $ object containing items
+				.eq(this.currentItem).addClass('active')
 			}
 		});
 
 	});
 </script>
-<?php
-$query = new WP_Query(
-	array(
-		'category_name'  => 'slider',
-		'posts_per_page' => -1,
-	)
-);
-?>
 <div id="ed-slider" class="slider owl-carousel">
 	<?php
-	if ( $query->have_posts() ) :
-		while ( $query->have_posts() ) :
-			$query->the_post();
-			$image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full', false );
+		while ( have_rows( 'front_slider' ) ) :
+			the_row();
 			?>
 			<div class="slides">
-				<img src="<?php echo esc_url( $image[0] ); ?>" alt="<?php the_title(); ?>" />
+				<img src="<?php echo esc_url( get_sub_field( 'image' )['url'] ); ?>" alt="<?php echo esc_attr( get_sub_field( 'image' )['alt'] ); ?>" loading="lazy" />
 				<div class="caption-wrapper">
 					<div class="slider-caption">
-						<div class="slider-title"> <?php the_title(); ?></div>
-						<div class = "slider-content"><?php the_excerpt();?></div>
-						<a <?php if ( ! has_excerpt() ) { ?> style="margin-top:40px;" <?php } ?> class='slider-viewmore ed-bttn' href="#" >Learn More</a>
+						<div class = "slider-content"><?php the_sub_field( 'content' ); ?></div>
+						<a href="<?php the_sub_field( 'learn_more_link' ); ?>" style="margin-top:40px;" class='slider-viewmore ed-bttn'>Learn More</a>
 					</div>
 				</div>
 			</div>
 		<?php
 		endwhile;
-		wp_reset_postdata();
-	endif;
 	?>
 </div>
+<div id="front-slider" class="front-slider slider">
+	<?php
+		while ( have_rows( 'front_slider' ) ) :
+			the_row();
+			?>
+			<div class="slides">
+				<img src="<?php echo esc_url( get_sub_field( 'image' )['url'] ); ?>" alt="<?php echo esc_attr( get_sub_field( 'image' )['alt'] ); ?>" loading="lazy" />
+				<div class="caption-wrapper">
+					<div class="slider-caption">
+						<div class = "slider-content"><?php the_sub_field( 'content' ); ?></div>
+						<a href="<?php the_sub_field( 'learn_more_link' ); ?>" style="margin-top:40px;" class='slider-viewmore ed-bttn'>Learn More</a>
+					</div>
+				</div>
+			</div>
+		<?php
+		endwhile;
+	?>
+</div>
+<script>
+	const slider = tns({
+		container: '#front-slider',
+		mode: 'gallery',
+		autoPlay: true,
+		controls: true,
+		nav: false,
+		pagination: false,
+		speed: 1000,
+		autoPlay: 9000,
+		loop: true,
+		items: 1,
+	});
+</script>
+	<?php
+endif;
+?>
